@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://112.74.163.100:3306/systemuserdb
+    username: root
+    password: systemuserdb_123

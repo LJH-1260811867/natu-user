@@ -1,8 +1,9 @@
 package edu.natu.systemuser.common.result;
 
 /**
- * 枚举了一些常用API操作码
- * Created by macro on 2019/4/19.
+ * @author LJH
+ * @des 枚举了一些常用API操作码
+ * @date 2021-09-15 16:38:45
  */
 public enum ResultCode implements IErrorCode {
     SUCCESS(200, "操作成功"),
@@ -18,10 +19,12 @@ public enum ResultCode implements IErrorCode {
         this.message = message;
     }
 
+    @Override
     public long getCode() {
         return code;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }

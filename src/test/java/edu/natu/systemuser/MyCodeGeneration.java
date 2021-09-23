@@ -31,7 +31,7 @@ public class MyCodeGeneration {
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setServiceName("%sDao");
-        gc.setServiceImplName("%sService");
+        gc.setServiceImplName("%sDaoImpl");
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
         autoGenerator.setGlobalConfig(gc);
@@ -44,8 +44,8 @@ public class MyCodeGeneration {
         dsc.setDbType(DbType.MYSQL);   //设置数据库类型，我是mysql
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("root");
-        dsc.setUrl("jdbc:mysql://123456/user");  //指定数据库
+        dsc.setPassword("123456");
+        dsc.setUrl("jdbc:mysql://112.74.163.100:3306/systemuser");  //指定数据库
         autoGenerator.setDataSource(dsc);
 
         // 策略配置
@@ -61,13 +61,13 @@ public class MyCodeGeneration {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(moduleName);
-        pc.setParent("edu.natu.systemuser.jtj");
+        pc.setParent("edu.natu.systemuser.business");
         pc.setService("dao");
-        pc.setServiceImpl("service");
-        pc.setMapper("model.mapper");
-        pc.setEntity("model.entity");
-        pc.setXml("model.mapper");
-        pc.setController("web");
+        pc.setServiceImpl("dao");
+        pc.setMapper("mapper");
+        pc.setEntity("model");
+        pc.setXml("mapper");
+        pc.setController("controller");
         autoGenerator.setPackageInfo(pc);
         // 执行生成
         autoGenerator.execute();
@@ -75,12 +75,12 @@ public class MyCodeGeneration {
 
     private static String setModuleName() {
         String moduleName = "";
-        System.out.println(("请输入模块名称（全为小写字母）："));
+        System.out.println(("请输入模块名称（必须由小写字母和下划线组成）："));
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNext()) {
             moduleName = scanner.next();
-            if (!moduleName.matches("[a-z]*")) {
-                System.out.println(("模块名称不符合要求：（必须全为小写字母）！"));
+            if (!moduleName.matches("[a-z_]*")) {
+                System.out.println(("模块名称不符合要求：（必须由小写字母和下划线组成）！"));
                 System.exit(-1);
             }
         }
@@ -121,7 +121,7 @@ public class MyCodeGeneration {
 
     private static boolean ifModuleExist(String moduleName) {
         boolean ifExist = false;
-        File[] files = new File(System.getProperty("user.dir") + "/src/main/java/edu/natu/systemuser/jtj").listFiles();
+        File[] files = new File(System.getProperty("user.dir") + "/src/main/java/edu/natu/systemuser/business").listFiles();
         for (File e : files) {
             if(e.isDirectory() &&  moduleName.equals(e.getName())) {
                 ifExist = true;

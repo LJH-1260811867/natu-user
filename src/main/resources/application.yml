@@ -1,6 +1,39 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://112.74.163.100:3306/systemuserdb
+    url: jdbc:mysql://112.74.163.100:3306/systemuser
     username: root
-    password: systemuserdb_123
+    password: 123456
+
+  security:
+    user:
+      name: ljh
+      password: 123456
+
+server:
+  port: 9527
+  servlet:
+    context-path: /systemuser
+
+http:
+  referer:
+    ip: localhost,192.168.0.2
+
+jwt:
+  #token有效时长（毫秒）
+  effective-duration: 180000
+  key: TjWnZr4u7x9z$C&F)J@Nq3t6wcQf
+
+#日志配置 无特殊需求无需更改
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
+    javax.activation: INFO
+    org.apache.catalina: INFO
+    org.apache.commons.beanutils.converters: INFO
+    org.apache.coyote.http11.Http11Processor: INFO
+    org.apache.http: INFO
+    org.apache.tomcat: INFO
+    org.springframework: INFO
+    com.chinamobile.cmss.bdpaas.resource.monitor: DEBUG
